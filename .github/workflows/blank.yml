@@ -35,7 +35,6 @@ jobs:
           CNB_TOKEN: ${{ secrets.CNB_TOKEN }}
         run: |
           curl -LO https://huggingface.co/second-state/gpt-oss-20b-GGUF/resolve/main/gpt-oss-20b-MXFP4_MOE.gguf
-          curl -LO https://huggingface.co/second-state/gpt-oss-20b-GGUF/resolve/main/gpt-oss-20b-f16.gguf
           sha256sum *.gguf
           docker run --rm \
             -e TZ=Asia/Shanghai \
@@ -43,7 +42,7 @@ jobs:
             -e CNB_API_ENDPOINT='https://api.cnb.cool' \
             -e CNB_REPO_SLUG='Jaime/rust-camp-s02-rust-embedded/env' \
             -e PLUGIN_TAG='gpt-oss-20b' \
-            -e PLUGIN_ATTACHMENTS='gpt-oss-20b-MXFP4_MOE.gguf,gpt-oss-20b-f16.gguf' \
+            -e PLUGIN_ATTACHMENTS='gpt-oss-20b-MXFP4_MOE.gguf' \
             -v $(pwd):$(pwd) \
             -w $(pwd) \
             cnbcool/attachments:latest
