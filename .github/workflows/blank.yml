@@ -34,9 +34,9 @@ jobs:
         env:
           CNB_TOKEN: ${{ secrets.CNB_TOKEN }}
         run: |
-          curl -LO https://huggingface.co/second-state/DeepSeek-R1-Distill-Qwen-1.5B-GGUF/resolve/main/DeepSeek-R1-Distill-Qwen-1.5B-Q5_K_S.gguf
-          curl -LO https://huggingface.co/second-state/DeepSeek-R1-Distill-Qwen-1.5B-GGUF/resolve/main/DeepSeek-R1-Distill-Qwen-1.5B-Q5_K_M.gguf
-          curl -LO https://huggingface.co/second-state/DeepSeek-R1-Distill-Qwen-1.5B-GGUF/resolve/main/DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf
+          curl -LO https://huggingface.co/second-state/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q5_K_S.gguf
+          curl -LO https://huggingface.co/second-state/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q5_K_M.gguf
+          curl -LO https://huggingface.co/second-state/Qwen3-1.7B-GGUF/resolve/main/Qwen3-1.7B-Q4_K_M.gguf
           sha256sum *.gguf
           docker run --rm \
             -e TZ=Asia/Shanghai \
@@ -44,7 +44,7 @@ jobs:
             -e CNB_API_ENDPOINT='https://api.cnb.cool' \
             -e CNB_REPO_SLUG='Jaime/rust-camp-s02-rust-embedded/env' \
             -e PLUGIN_TAG='DeepSeek-R1-Distill-Qwen' \
-            -e PLUGIN_ATTACHMENTS='DeepSeek-R1-Distill-Qwen-1.5B-Q5_K_S.gguf,DeepSeek-R1-Distill-Qwen-1.5B-Q5_K_M.gguf,DeepSeek-R1-Distill-Qwen-1.5B-Q4_K_M.gguf' \
+            -e PLUGIN_ATTACHMENTS='Qwen3-1.7B-Q5_K_S.gguf,Qwen3-1.7B-Q5_K_M.gguf,Qwen3-1.7B-Q4_K_M.gguf' \
             -v $(pwd):$(pwd) \
             -w $(pwd) \
             cnbcool/attachments:latest
