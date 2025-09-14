@@ -34,15 +34,17 @@ jobs:
         env:
           CNB_TOKEN: ${{ secrets.CNB_TOKEN }}
         run: |
-          curl -LO https://huggingface.co/second-state/Llama-3.2-1B-Instruct-GGUF/resolve/main/Llama-3.2-1B-Instruct-Q5_K_M.gguf
-          sha256sum Llama-3.2-1B-Instruct-Q5_K_M.gguf
+          curl -LO https://huggingface.co/second-state/Llama-3.2-1B-Instruct-GGUF/resolve/main/Llama-3.2-1B-Instruct-Q5_K_S.gguf
+          curl -LO https://huggingface.co/second-state/Llama-3.2-1B-Instruct-GGUF/resolve/main/Llama-3.2-1B-Instruct-Q4_K_M.gguf
+          curl -LO https://huggingface.co/second-state/Llama-3.2-1B-Instruct-GGUF/resolve/main/Llama-3.2-1B-Instruct-Q6_K.gguf
+          sha256sum Llama-3.2-1B-Instruct-Q5_K_S.gguf Llama-3.2-1B-Instruct-Q4_K_M.gguf Llama-3.2-1B-Instruct-Q6_K.gguf
           docker run --rm \
             -e TZ=Asia/Shanghai \
             -e CNB_TOKEN="$CNB_TOKEN" \
             -e CNB_API_ENDPOINT='https://api.cnb.cool' \
             -e CNB_REPO_SLUG='Jaime/rust-camp-s02-rust-embedded/env' \
             -e PLUGIN_TAG='Llama-3.2' \
-            -e PLUGIN_ATTACHMENTS='Llama-3.2-1B-Instruct-Q5_K_M.gguf' \
+            -e PLUGIN_ATTACHMENTS='Llama-3.2-1B-Instruct-Q5_K_S.gguf,Llama-3.2-1B-Instruct-Q4_K_M.gguf,Llama-3.2-1B-Instruct-Q6_K.gguf' \
             -v $(pwd):$(pwd) \
             -w $(pwd) \
             cnbcool/attachments:latest
