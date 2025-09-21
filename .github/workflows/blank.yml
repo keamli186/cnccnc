@@ -34,10 +34,6 @@ jobs:
         env:
           CNB_TOKEN: ${{ secrets.CNB_TOKEN }}
         run: |
-          curl -LO https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.4.0%2Bcpu.zip
-          curl -LO https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.8.0%2Bcpu.zip
-          curl -LO https://download.pytorch.org/libtorch/cpu/libtorch-macos-arm64-2.4.0.zip
-          curl -LO https://download.pytorch.org/libtorch/cpu/libtorch-macos-arm64-2.8.0.zip
           curl -LO https://download.pytorch.org/libtorch/cu124/libtorch-cxx11-abi-shared-with-deps-2.4.0%2Bcu124.zip
           sha256sum *.zip
           docker run --rm \
@@ -46,7 +42,7 @@ jobs:
             -e CNB_API_ENDPOINT='https://api.cnb.cool' \
             -e CNB_REPO_SLUG='Jaime/rust-camp-s02-rust-embedded/env' \
             -e PLUGIN_TAG='libtorch' \
-            -e PLUGIN_ATTACHMENTS='libtorch-shared-with-deps-2.4.0%2Bcpu.zip,libtorch-shared-with-deps-2.8.0%2Bcpu.zip,libtorch-macos-arm64-2.4.0.zip，libtorch-macos-arm64-2.8.0.zip，libtorch-cxx11-abi-shared-with-deps-2.4.0%2Bcu124.zip' \
+            -e PLUGIN_ATTACHMENTS='libtorch-cxx11-abi-shared-with-deps-2.4.0%2Bcu124.zip' \
             -v $(pwd):$(pwd) \
             -w $(pwd) \
             cnbcool/attachments:latest
